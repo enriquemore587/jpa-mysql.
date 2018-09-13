@@ -8,6 +8,8 @@ import com.enrique.dents.entity.User;
  * @author Jose Enrique Vergara
  *
  */
-public interface UserDao extends CrudRepository<User, Long>{
+public interface UserDao extends CrudRepository<User, Long> {
+
+	public User findByUserName(String userName);
 
 }

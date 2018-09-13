@@ -2,6 +2,7 @@ package com.enrique.dents.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * @author Jose Enrique Vergara
@@ -27,8 +30,8 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(unique = true)
-	private String user_name;
+	@Column(name = "user_name", unique = true)
+	private String userName;
 	private String password;
 
 	@ManyToOne
@@ -57,12 +60,21 @@ public class User implements Serializable {
 
 	private Integer level;
 
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date createAt;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date momentStartsSession;
+
 	public User() {
 	}
 
-	public User(String user_name, String password) {
-		this.user_name = user_name;
+	public User(String userName, String password) {
+		this.userName = userName;
 		this.password = password;
+		this.createAt = new Date();
+		this.momentStartsSession = new Date();
+		this.level = 1;
 	}
 
 	public Long getId() {
@@ -73,12 +85,12 @@ public class User implements Serializable {
 		this.id = id;
 	}
 
-	public String getUser_name() {
-		return user_name;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setUser_name(String user_name) {
-		this.user_name = user_name;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getPassword() {
@@ -153,9 +165,25 @@ public class User implements Serializable {
 		this.level = level;
 	}
 
+	public Date getMomentStartsSession() {
+		return momentStartsSession;
+	}
+
+	public void setMomentStartsSession(Date momentStartsSession) {
+		this.momentStartsSession = momentStartsSession;
+	}
+
+	public Date getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
+
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", user_name=" + user_name + ", password=" + password + "]";
+		return "User [id=" + id + ", userName=" + userName + ", password=" + password + "]";
 	}
 
 	/**

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.enrique.dents.entity.Profile;
 import com.enrique.dents.services.ProfileService;
-import com.enrique.dents.utils.enums.StatusMessages;
+import com.enrique.dents.utils.enums.Messages;
 import com.enrique.dents.utils.request.ProfileSaveReq;
 import com.enrique.dents.utils.request.ProfileUpdateReq;
 import com.enrique.dents.utils.response.GenericSuccesResp;
@@ -36,26 +36,26 @@ public class ProfileController {
 	@PostMapping("/save")
 	public GenericSuccesResp save(@RequestBody ProfileSaveReq profileSaveReq) {
 		if (profileSaveReq.okData()) {
-			return new GenericSuccesResp(StatusMessages._MISSING_PARAMS_STATUS.getDescripcion(),
-					StatusMessages._MISSING_PARAMS_MSG.getDescripcion());
+			return new GenericSuccesResp(Messages._MISSING_PARAMS_STATUS.getDescripcion(),
+					Messages._MISSING_PARAMS_MSG.getDescripcion());
 		} else {
-			this.profileService.save(new Profile(profileSaveReq.getDescription(), profileSaveReq.getType()));
-			return new GenericSuccesResp(StatusMessages._SUCCESS_STATUS.getDescripcion(),
-					StatusMessages._SAVED_MSG.getDescripcion());
+			this.profileService.save(new Profile(profileSaveReq.getDescription()));
+			return new GenericSuccesResp(Messages._SUCCESS_STATUS.getDescripcion(),
+					Messages._SAVED_MSG.getDescripcion());
 		}
 	}
 
 	@PostMapping("/update")
 	public GenericSuccesResp update(@RequestBody ProfileUpdateReq profileUpdateReq) {
 		if (profileUpdateReq.okData()) {
-			return new GenericSuccesResp(StatusMessages._MISSING_PARAMS_STATUS.getDescripcion(),
-					StatusMessages._MISSING_PARAMS_MSG.getDescripcion());
+			return new GenericSuccesResp(Messages._MISSING_PARAMS_STATUS.getDescripcion(),
+					Messages._MISSING_PARAMS_MSG.getDescripcion());
 		} else {
-			Profile profile = new Profile(profileUpdateReq.getDescription(), profileUpdateReq.getType());
+			Profile profile = new Profile(profileUpdateReq.getDescription());
 			profile.setId(profileUpdateReq.getId());
 			this.profileService.save(profile);
-			return new GenericSuccesResp(StatusMessages._SUCCESS_STATUS.getDescripcion(),
-					StatusMessages._UPDATED_MSG.getDescripcion());
+			return new GenericSuccesResp(Messages._SUCCESS_STATUS.getDescripcion(),
+					Messages._UPDATED_MSG.getDescripcion());
 		}
 	}
 

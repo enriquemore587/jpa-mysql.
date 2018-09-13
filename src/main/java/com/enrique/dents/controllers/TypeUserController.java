@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.enrique.dents.entity.TypeUser;
 import com.enrique.dents.services.TypeUserService;
-import com.enrique.dents.utils.enums.StatusMessages;
+import com.enrique.dents.utils.enums.Messages;
 import com.enrique.dents.utils.request.TypeUserSaveReq;
 import com.enrique.dents.utils.request.TypeUserUpdateReq;
 import com.enrique.dents.utils.response.GenericSuccesResp;
@@ -41,26 +41,26 @@ public class TypeUserController {
 	@PostMapping("/save")
 	public GenericSuccesResp save(@RequestBody TypeUserSaveReq typeUserSaveReq) {
 		if (typeUserSaveReq.okData()) {
-			return new GenericSuccesResp(StatusMessages._MISSING_PARAMS_STATUS.getDescripcion(),
-					StatusMessages._MISSING_PARAMS_MSG.getDescripcion());
+			return new GenericSuccesResp(Messages._MISSING_PARAMS_STATUS.getDescripcion(),
+					Messages._MISSING_PARAMS_MSG.getDescripcion());
 		} else {
 			this.typeUserService.save(new TypeUser(typeUserSaveReq.getDescription()));
-			return new GenericSuccesResp(StatusMessages._SUCCESS_STATUS.getDescripcion(),
-					StatusMessages._SAVED_MSG.getDescripcion());
+			return new GenericSuccesResp(Messages._SUCCESS_STATUS.getDescripcion(),
+					Messages._SAVED_MSG.getDescripcion());
 		}
 	}
 
 	@PostMapping("/update")
 	public GenericSuccesResp update(@RequestBody TypeUserUpdateReq typeUserUpdateReq) {
 		if (typeUserUpdateReq.okData()) {
-			return new GenericSuccesResp(StatusMessages._MISSING_PARAMS_STATUS.getDescripcion(),
-					StatusMessages._MISSING_PARAMS_MSG.getDescripcion());
+			return new GenericSuccesResp(Messages._MISSING_PARAMS_STATUS.getDescripcion(),
+					Messages._MISSING_PARAMS_MSG.getDescripcion());
 		} else {
 			TypeUser typeUser = new TypeUser(typeUserUpdateReq.getDescription());
 			typeUser.setId(typeUserUpdateReq.getId());
 			this.typeUserService.save(typeUser);
-			return new GenericSuccesResp(StatusMessages._SUCCESS_STATUS.getDescripcion(),
-					StatusMessages._UPDATED_MSG.getDescripcion());
+			return new GenericSuccesResp(Messages._SUCCESS_STATUS.getDescripcion(),
+					Messages._UPDATED_MSG.getDescripcion());
 		}
 	}
 }

@@ -11,6 +11,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
+ * ENTIDAD CREADA PARA IDENTIFICAR EL PERFIL DEL USUARIO
+ * 1.- DOCTORES
+ * 3.- PACIENTES
  * @author Jose Enrique Vergara
  *
  */
@@ -22,7 +25,6 @@ public class Profile implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String description;
-	private int type;
 
 	@OneToMany(mappedBy = "profile")
 	private List<User> userList;
@@ -30,9 +32,8 @@ public class Profile implements Serializable {
 	public Profile() {
 	}
 
-	public Profile(String description, int type) {
+	public Profile(String description) {
 		this.description = description;
-		this.type = type;
 	}
 
 	public Long getId() {
@@ -51,13 +52,6 @@ public class Profile implements Serializable {
 		this.description = description;
 	}
 
-	public int getType() {
-		return type;
-	}
-
-	public void setType(int type) {
-		this.type = type;
-	}
 
 	public List<User> getUserList() {
 		return userList;
@@ -69,7 +63,7 @@ public class Profile implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Profile [id=" + id + ", description=" + description + ", type=" + type + "]";
+		return "Profile [id=" + id + ", description=" + description + "]";
 	}
 
 	/**

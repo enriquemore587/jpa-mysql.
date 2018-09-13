@@ -6,7 +6,6 @@ package com.enrique.dents.utils.request;
  */
 public class ProfileUpdateReq {
 	private Long id;
-	private Integer type;
 	private String description;
 
 	public String getDescription() {
@@ -18,13 +17,10 @@ public class ProfileUpdateReq {
 	}
 
 	public Boolean okData() {
-		return this.id != null && this.id > 0 && this.type != null && this.type > 0 && this.description != ""
+		return this.id != null && this.id > 0 && this.description != ""
 				&& this.description != null ? false : true;
 	}
 
-	public Integer getType() {
-		return type;
-	}
 
 	public Long getId() {
 		return id;
@@ -34,13 +30,10 @@ public class ProfileUpdateReq {
 		this.id = id;
 	}
 
-	public void setType(Integer type) {
-		this.type = type;
-	}
 
 	@Override
 	public String toString() {
-		return "ProfileUpdateReq [id=" + id + ", type=" + type + ", description=" + description + "]";
+		return "ProfileUpdateReq [id=" + id + ", description=" + description + "]";
 	}
 
 }

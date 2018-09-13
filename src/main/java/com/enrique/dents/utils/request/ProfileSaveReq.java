@@ -5,7 +5,6 @@ package com.enrique.dents.utils.request;
  *
  */
 public class ProfileSaveReq {
-	private Integer type;
 	private String description;
 
 	public String getDescription() {
@@ -17,20 +16,13 @@ public class ProfileSaveReq {
 	}
 
 	public Boolean okData() {
-		return this.type != null && this.type > 0 && this.description != "" && this.description != null ? false : true;
+		return this.description != "" && this.description != null ? false : true;
 	}
 
-	public Integer getType() {
-		return type;
-	}
-
-	public void setType(Integer type) {
-		this.type = type;
-	}
 
 	@Override
 	public String toString() {
-		return "ProfileSaveReq [type=" + type + ", description=" + description + "]";
+		return "ProfileSaveReq [description=" + description + "]";
 	}
 
 }

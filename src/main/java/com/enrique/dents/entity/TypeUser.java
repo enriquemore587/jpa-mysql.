@@ -11,6 +11,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
+ * ENTIDAD CREADA PARA IDENTIFICAR EL DISPOSITIVO DONDE SE HA CONECTADO
+ * 1.-	MOBILE
+ * 2.-	WEB
+ * 3.-	MOBILE & WEB
  * @author Jose Enrique Vergara
  *
  */

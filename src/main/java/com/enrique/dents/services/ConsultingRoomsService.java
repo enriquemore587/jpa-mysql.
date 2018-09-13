@@ -13,5 +13,5 @@ public interface ConsultingRoomsService {
 	public List<ConsultingRooms> findAll();
 
 	public void save(ConsultingRooms consultingRooms);
-
+	
 }

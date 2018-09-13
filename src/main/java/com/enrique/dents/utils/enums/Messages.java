@@ -7,13 +7,15 @@ import java.util.List;
  * @author Jose Enrique Vergara
  *
  */
-public enum StatusMessages {
+public enum Messages {
 	_SUCCESS_STATUS(1, "SUCCESS"), _MISSING_PARAMS_STATUS(2, "MISSING PARAMS"),
-	_MISSING_PARAMS_MSG(3, "MISSING PARAMS"), _SAVED_MSG(4, "SAVED"), _UPDATED_MSG(5, "UPDATED");
+	_MISSING_PARAMS_MSG(3, "MISSING PARAMS"), _SAVED_MSG(4, "SAVED"), _UPDATED_MSG(5, "UPDATED"),
+	_UNREGISTERED_USER(6, "UNREGISTERED USER"),_USER_NOT_FOUND(7, "EL USUARIO NO EXISTE"),_INCORRECT_PASSWORD(8, "CONTRASEÑA INCORRECTA"),
+	_UNREGISTERED_USER_PERSONAL_DATA(9, "UNREGISTERED USER PERSONAL DATA");
 	private final int id;
 	private final String descripcion;
 
-	private StatusMessages(final int id, final String descripcion) {
+	private Messages(final int id, final String descripcion) {
 		this.id = id;
 		this.descripcion = descripcion;
 	}
@@ -28,7 +30,7 @@ public enum StatusMessages {
 
 	public static List<String> obtenerTodosDescripcion() {
 		List<String> l = new ArrayList<String>();
-		for (StatusMessages item : values()) {
+		for (Messages item : values()) {
 			l.add(item.descripcion);
 		}
 		return l;
