@@ -1,5 +1,7 @@
 package com.enrique.dents.services;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
 
@@ -28,30 +30,40 @@ public class UserPersonalDataServiceImpl implements UserPersonalDataService {
 	private CivilStatusDao civilStatusDao;
 
 	@Override
-	public String save(UserPersonalDataSaveReq userPersonalDataSaveReq) {
+	public String save(UserPersonalDataSaveReq userPersonalDataSaveReq) throws ParseException {
 		String response = "";
+
 		Optional<User> user = this.userDao.findById(userPersonalDataSaveReq.getUserId());
-		if (!user.isPresent()) {
-			// aqui no existe usuario
+
+		if (!user.isPresent()) { // aqui no existe usuario
 			response = Status._USER_NOT_FOUND.getDescripcion();
 		} else {
-			
-			UserPersonalData userPersonalData = new UserPersonalData(userPersonalDataSaveReq.getName(),
-					userPersonalDataSaveReq.getLast_name(), userPersonalDataSaveReq.getLast_name2(),
-					userPersonalDataSaveReq.getPhone_number(), userPersonalDataSaveReq.getMobile_phone_number(),
-					userPersonalDataSaveReq.getGender(), new Date(), userPersonalDataSaveReq.getImportant_note());
-			userPersonalData.setUser(user.get());
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			Date birthdate = format.parse(userPersonalDataSaveReq.getBirthdate());
+			UserPersonalData userPersonalData = null;
+			if (user.get().getUserPersonalData() == null) {
+				userPersonalData = new UserPersonalData(userPersonalDataSaveReq.getName(),
+						userPersonalDataSaveReq.getLast_name(), userPersonalDataSaveReq.getLast_name2(),
+						userPersonalDataSaveReq.getPhone_number(), userPersonalDataSaveReq.getMobile_phone_number(),
+						userPersonalDataSaveReq.getGender(), birthdate, userPersonalDataSaveReq.getImportant_note());
+				userPersonalData.setUser(user.get());
+			} else {
+				userPersonalData = new UserPersonalData(user.get().getId(), userPersonalDataSaveReq.getName(),
+						userPersonalDataSaveReq.getLast_name(), userPersonalDataSaveReq.getLast_name2(),
+						userPersonalDataSaveReq.getPhone_number(), userPersonalDataSaveReq.getMobile_phone_number(),
+						userPersonalDataSaveReq.getGender(), birthdate, userPersonalDataSaveReq.getImportant_note());
+				userPersonalData.setUser(user.get());
+			}
 
 			Optional<CivilStatus> civilStatus = this.civilStatusDao
 					.findById(userPersonalDataSaveReq.getCivilStatusId());
 
-			if (!civilStatus.isPresent()) {
-				// aqui no existe civilstatus
+			if (!civilStatus.isPresent()) { // aqui no existe civilstatus
 				response = Status._CIVIL_STATUS_NOT_FOUND.getDescripcion();
 			} else {
 				userPersonalData.setCivilStatus(civilStatus.get());
 				this.save(userPersonalData);
-				response = Status._SUCCESS.getDescripcion();
+				response = user.get().getUserPersonalData() == null ? Status._SUCCESS.getDescripcion() : Status._UPDATED.getDescripcion() ;
 			}
 
 		}
@@ -61,6 +73,16 @@ public class UserPersonalDataServiceImpl implements UserPersonalDataService {
 	@Override
 	public void save(UserPersonalData userPersonalData) {
 		this.userPersonalDataDao.save(userPersonalData);
+	}
+
+	@Override
+	public UserPersonalData findByUser(Long userId) {
+		Optional<User> user = this.userDao.findById(userId);
+		if (user.isPresent()) {
+			return this.userPersonalDataDao.findByUser(user.get());
+		} else {
+			return null;
+		}
 	}
 
 }

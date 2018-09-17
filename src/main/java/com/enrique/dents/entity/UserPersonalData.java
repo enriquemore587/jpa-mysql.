@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * @author Jose Enrique Vergara
@@ -33,6 +35,8 @@ public class UserPersonalData implements Serializable {
 	private String phone_number;
 	private String mobile_phone_number;
 	private String gender;
+
+	@Temporal(TemporalType.DATE)
 	private Date birthdate;
 	private String important_note;
 
@@ -47,6 +51,19 @@ public class UserPersonalData implements Serializable {
 	public UserPersonalData() {
 	}
 
+	public UserPersonalData(Long id, String name, String last_name, String last_name2, String phone_number,
+			String mobile_phone_number, String gender, Date birthdate, String important_note) {
+		this.id = id;
+		this.name = name;
+		this.last_name = last_name;
+		this.last_name2 = last_name2;
+		this.phone_number = phone_number;
+		this.mobile_phone_number = mobile_phone_number;
+		this.gender = gender;
+		this.birthdate = birthdate;
+		this.important_note = important_note;
+	}
+	
 	public UserPersonalData(String name, String last_name, String last_name2, String phone_number,
 			String mobile_phone_number, String gender, Date birthdate, String important_note) {
 		this.name = name;
