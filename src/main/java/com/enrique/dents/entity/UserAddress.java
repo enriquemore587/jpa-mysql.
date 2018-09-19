@@ -40,6 +40,8 @@ public class UserAddress implements Serializable {
 
 	public UserAddress() {
 	}
+	
+	
 
 	public UserAddress(String cp, Integer state, Integer municipality, String colony, String street, String num_ext,
 			String num_int) {

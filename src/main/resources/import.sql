@@ -28,6 +28,6 @@ INSERT INTO meeting_category ( description ) values("BRACKETS");
 
 /*
 INSERT INTO users (create_at, level, moment_starts_session, password , user_name, consulting_room_id, profile_id, type_user_id)
-VALUES('2018-09-17 15:23:38',	1,	'2018-09-17 15:23:38',	'123',	'avelar2@hotmail.com',	1,	1,	1);
+VALUES('2018-09-17 15:23:38',	1,	'2018-09-17 15:23:38',	'123',	'avelar@hotmail.com',	1,	1,	1);
 INSERT INTO users (create_at, level, moment_starts_session, password , user_name, consulting_room_id, profile_id, type_user_id)
 VALUES('2018-09-17 15:23:38',	1,	'2018-09-17 15:23:38',	'123',	'avelar3@hotmail.com',	1,	1,	1);*/
