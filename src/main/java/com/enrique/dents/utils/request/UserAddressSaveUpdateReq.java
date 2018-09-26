@@ -9,9 +9,9 @@ public class UserAddressSaveUpdateReq {
 	private String num_ext;
 	private String num_int;
 	private Long userId;
-	
-	public UserAddressSaveUpdateReq(String cp, Integer state, Integer municipality, String colony,
-			String street, String num_ext, String num_int, Long userId) {
+
+	public UserAddressSaveUpdateReq(String cp, Integer state, Integer municipality, String colony, String street,
+			String num_ext, String num_int, Long userId) {
 		this.cp = cp;
 		this.state = state;
 		this.municipality = municipality;
@@ -20,6 +20,27 @@ public class UserAddressSaveUpdateReq {
 		this.num_ext = num_ext;
 		this.num_int = num_int;
 		this.userId = userId;
+	}
+
+	public boolean okData() {
+		if (this.cp == null || this.cp == "") {
+			return true;
+		} else if (this.state == null || this.state < 1) {
+			return true;
+		} else if (this.municipality == null || this.municipality < 1) {
+			return true;
+		} else if (this.colony == null || this.colony == "") {
+			return true;
+		} else if (this.street == null || this.street == "") {
+			return true;
+		} else if (this.num_ext == null || this.num_ext == "") {
+			return true;
+		} else if (this.num_int == null || this.num_int == "") {
+			return true;
+		} else if (this.userId == null || this.userId < 1l) {
+			return true;
+		} else
+			return false;
 	}
 
 	public String getCp() {
@@ -85,6 +106,5 @@ public class UserAddressSaveUpdateReq {
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
-	
 
 }

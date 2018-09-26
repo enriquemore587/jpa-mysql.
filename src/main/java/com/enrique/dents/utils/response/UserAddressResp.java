@@ -10,9 +10,10 @@ public class UserAddressResp {
 	private String street;
 	private String num_ext;
 	private String num_int;
-	
-	
-	
+		
+	public UserAddressResp(Long id) {
+		this.id = id;
+	}
 	public UserAddressResp(Long id, String cp, Integer state, Integer municipality, String colony, String street,
 			String num_ext, String num_int) {
 		

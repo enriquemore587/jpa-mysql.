@@ -8,7 +8,10 @@ package com.enrique.dents.utils.enums;
  *
  */
 public enum Constants {
-	_NO_DATA(1, "NO DATA");
+	_NO_DATA(1, "NO DATA"),
+	_ERROR_DATE_FORMAT(2, "ERROR DATE FORMAT"),
+	_INFORMATION_NOT_STORED(3, "INFORMATION NOT STORED");
+	
 	private final int id;
 	private final String descripcion;
 

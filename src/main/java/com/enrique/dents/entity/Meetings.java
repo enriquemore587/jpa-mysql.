@@ -36,13 +36,13 @@ public class Meetings implements Serializable {
 	@Temporal(TemporalType.TIME)
 	private Date end_meeting;
 
-	private String is_important;
+	private Boolean is_important;
 
 	private Float cost;
 
-	private String meeting_done;
+	private Boolean meeting_done;
 
-	private String paid;
+	private Boolean paid;
 
 	private Float debt;
 
@@ -69,8 +69,8 @@ public class Meetings implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Meetings(Date date_meeting, Date start_meeting, Date end_meeting, String is_important, Float cost,
-			String meeting_done, String paid, Float debt) {
+	public Meetings(Date date_meeting, Date start_meeting, Date end_meeting, Boolean is_important, Float cost,
+			Boolean meeting_done, Boolean paid, Float debt) {
 		this.date_meeting = date_meeting;
 		this.start_meeting = start_meeting;
 		this.end_meeting = end_meeting;
@@ -113,11 +113,11 @@ public class Meetings implements Serializable {
 		this.end_meeting = end_meeting;
 	}
 
-	public String getIs_important() {
+	public Boolean getIs_important() {
 		return is_important;
 	}
 
-	public void setIs_important(String is_important) {
+	public void setIs_important(Boolean is_important) {
 		this.is_important = is_important;
 	}
 
@@ -129,19 +129,19 @@ public class Meetings implements Serializable {
 		this.cost = cost;
 	}
 
-	public String getMeeting_done() {
+	public Boolean getMeeting_done() {
 		return meeting_done;
 	}
 
-	public void setMeeting_done(String meeting_done) {
+	public void setMeeting_done(Boolean meeting_done) {
 		this.meeting_done = meeting_done;
 	}
 
-	public String getPaid() {
+	public Boolean getPaid() {
 		return paid;
 	}
 
-	public void setPaid(String paid) {
+	public void setPaid(Boolean paid) {
 		this.paid = paid;
 	}
 

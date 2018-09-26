@@ -25,14 +25,18 @@ public class UserAddressServiceImpl implements UserAddressService {
 	@Override
 	public UserAddressResp findByUser(Long userId) {
 		UserAddressResp resp = null;
-
+		UserAddress userAddress = null;
 		Optional<User> user = this.userDao.findById(userId);
-
-		UserAddress userAddress = this.userAddressDao.findByUser(user.get());
+		if (!user.isPresent()) {
+			return null;
+		}
+		userAddress = this.userAddressDao.findByUser(user.get());
 		if (userAddress != null) {
 			resp = new UserAddressResp(userAddress.getId(), userAddress.getCp(), userAddress.getState(),
 					userAddress.getMunicipality(), userAddress.getColony(), userAddress.getStreet(),
 					userAddress.getNum_ext(), userAddress.getNum_int());
+		}else {
+			resp = new UserAddressResp(0l);
 		}
 		return resp;
 	}
@@ -43,19 +47,23 @@ public class UserAddressServiceImpl implements UserAddressService {
 		Optional<User> user = this.userDao.findById(userAddressSaveUpdateReq.getUserId());
 		UserAddress userAddress = this.userAddressDao.findByUser(user.get());
 		if (userAddress == null) {
-			userAddress = new UserAddress(userAddressSaveUpdateReq.getCp(), userAddressSaveUpdateReq.getState(), userAddressSaveUpdateReq.getMunicipality(), userAddressSaveUpdateReq.getColony(), userAddressSaveUpdateReq.getStreet(), userAddressSaveUpdateReq.getNum_ext(), userAddressSaveUpdateReq.getNum_int());
+			userAddress = new UserAddress(userAddressSaveUpdateReq.getCp(), userAddressSaveUpdateReq.getState(),
+					userAddressSaveUpdateReq.getMunicipality(), userAddressSaveUpdateReq.getColony(),
+					userAddressSaveUpdateReq.getStreet(), userAddressSaveUpdateReq.getNum_ext(),
+					userAddressSaveUpdateReq.getNum_int());
 			userAddress.setUser(user.get());
 			respuesta = Status._SUCCESS.getDescripcion();
-		}else {
+		} else {
 			userAddress = user.get().getUserAddress();
-			userAddress = new UserAddress(userAddressSaveUpdateReq.getCp(), userAddressSaveUpdateReq.getState(), userAddressSaveUpdateReq.getMunicipality(), userAddressSaveUpdateReq.getColony(), userAddressSaveUpdateReq.getStreet(), userAddressSaveUpdateReq.getNum_ext(), userAddressSaveUpdateReq.getNum_int());
+			userAddress = new UserAddress(userAddressSaveUpdateReq.getCp(), userAddressSaveUpdateReq.getState(),
+					userAddressSaveUpdateReq.getMunicipality(), userAddressSaveUpdateReq.getColony(),
+					userAddressSaveUpdateReq.getStreet(), userAddressSaveUpdateReq.getNum_ext(),
+					userAddressSaveUpdateReq.getNum_int());
 			respuesta = Status._UPDATED.getDescripcion();
 		}
 		this.userAddressDao.save(userAddress);
 		System.out.println(respuesta);
 		return respuesta;
 	}
-	
-	
 
 }
